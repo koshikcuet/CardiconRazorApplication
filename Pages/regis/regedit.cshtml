@@ -1,0 +1,195 @@
+﻿@page
+@model Cardicon.Pages.regis.regeditModel
+@{
+}
+<div class="container mt-3">
+
+    <div class="row">
+        <div class="col-12">
+            <h2 class="hdvio">Registration Form</h2>
+        </div>
+    </div>
+
+    @if (Model.errmsg.Length > 1)
+    {
+        <script type="text/javascript">
+            $(function () {
+                ShowError("@Model.errmsg");
+            });
+        </script>
+    }
+    @if (Model.success.Length > 1)
+    {
+        <script type="text/javascript">
+            $(function () {
+                showFinalMsg("Success", "@Model.success", "Go To List", "/regis/reglist");
+            });
+        </script>
+    }
+
+    <div class="row mt-3 bg-white">
+        <form method="post" class="pe-lg-5 ps-lg-5 pt-3" enctype="multipart/form-data">
+            <div class="mb-3 row">
+                <label for="title" class="col-sm-2 col-form-label">Title</label>
+                <div class="col-sm-10">
+                    <select class="form-select" aria-label="Default select example" id="title" name="title">
+                        <option selected value="0">-Select-</option>
+                        <option value="MR">MR</option>
+                        <option value="MRS">MRS</option>
+                        <option value="MISS">MISS</option>
+                    </select>
+                </div>
+                <input type="hidden" name="atn" id="atn" value="@Model.regad.atn" />
+            </div>
+            <div class="mb-3 row">
+                <label for="nam" class="col-sm-2 col-form-label">Name</label>
+                <div class="col-sm-10">
+                    <input type="text" style="text-transform: uppercase" class="form-control" id="nam" name="nam" value="@Model.regad.nam">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="degree" class="col-sm-2 col-form-label">Degree</label>
+                <div class="col-sm-10">
+                    <input type="text" style="text-transform: uppercase" class="form-control" id="degree" name="degree" value="@Model.regad.degree">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="institute" class="col-sm-2 col-form-label">Institute/Organization</label>
+                <div class="col-sm-10">
+                    <input type="text" style="text-transform: uppercase" class="form-control" id="institute" name="institute" value="@Model.regad.institute">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="designation" class="col-sm-2 col-form-label">Present Position</label>
+                <div class="col-sm-10">
+                    <input type="text" style="text-transform: uppercase" class="form-control" id="designation" name="designation" value="@Model.regad.designation">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="city" class="col-sm-2 col-lg-2 col-form-label">City</label>
+                <div class="col-sm-10 col-lg-4">
+                    <input type="text" style="text-transform: uppercase" class="form-control" id="city" name="city" value="@Model.regad.city">
+                </div>
+                <label for="country" class="col-sm-2 col-lg-2 col-form-label">Country</label>
+                <div class="col-sm-10 col-lg-4">
+                    <input type="text" style="text-transform: uppercase" class="form-control" id="country" name="country" value="@Model.regad.country">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="country" class="col-sm-2 col-lg-2 col-form-label">Mobile</label>
+                <div class="col-sm-10 col-lg-4">
+                    <input type="number" class="form-control" id="mobile" name="mobile" value="@Model.regad.mobile">
+                </div>
+                <label for="email" class="col-sm-2 col-lg-2 col-form-label">Email</label>
+                <div class="col-sm-10 col-lg-4">
+                    <input type="email" class="form-control" id="email" name="email" value="@Model.regad.email">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="title" class="col-sm-2 col-lg-2 col-form-label">Category</label>
+                <div class="col-sm-10 col-lg-4">
+                    <select class="form-select" onchange="picktk()" asp-for=regad.cat aria-label="Default select example" id="cat" name="cat">
+                        <option selected value="0">-Select-</option>
+                        <option value="Cardiologist">Cardiologist</option>
+                        <option value="Physician">Physician</option>
+                        <option value="Fellow (Students) Cardiology">Fellow (Students) Cardiology</option>
+                        <option value="Fellow (Students) Cardiac Surgery">Fellow (Students) Cardiac Surgery</option>
+                        <option value="Industrial Participants">Industrial Participants</option>
+                        <option value="Cath Lab Technician">Cath Lab Technician</option>
+                        <option value="Cath Lab Nurse">Cath Lab Nurse</option>
+                        <option value="Others">Others</option>
+                    </select>
+                </div>
+                <label for="tk" class="col-sm-2 col-lg-2 col-form-label">Payment (Tk.)</label>
+                <div class="col-sm-10 col-lg-4">
+                    <input type="number" readonly class="form-control" id="tk" name="tk" value="@Model.regad.tk">
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="postedFile" id="postedFileCp" class="form-label">Please upload Payment Slip</label>
+                <input class="form-control" type="file" id="postedFile" name="postedFile" accept="image/*">
+
+                <div class="col-12 py-2 ppirow">
+                    <img id="imgpp" onclick="toggleIsize(this);" src="../docs/@Model.regad.slip" class="img-thumbail responsive-img" style="width: 100px; height: auto; margin: 0 auto; display: block; cursor:pointer" />
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="status" class="col-sm-2 col-form-label">Status</label>
+                <div class="col-sm-10">
+                    <select class="form-select" asp-for=regad.status aria-label="Default select example" id="status" name="status">
+                        <option value="Pending">Pending</option>
+                        <option value="Confirmed">Confirmed</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <div class="offset-sm-3 col-sm-3 d-grid">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+                @*<div class="offset-sm-3 col-sm-3 d-grid">
+                    <button type="submit" asp-page-handler="Delete" class="btn btn-primary">Delete</button>
+                </div>*@
+                <div class="col-sm-3 d-grid">
+                    <a class="btn btn-warning" href="/regis/reglist">Cancel</a>
+                </div>
+
+            </div>
+        </form>
+
+        @*<form method="post" enctype="multipart/form-data">
+        <span>Select File:</span>
+        <input type="file" name="postedFile" />
+        <input type="submit" value="Upload" asp-page-handler="Upload" />
+        <br />
+        <span style="color:green">@Html.Raw(Model.success)</span>
+        </form>*@
+    </div>
+
+    <script>
+        $(function () {
+            $('#imglogo').attr('src', '../images/brand-logo.jpg');
+            $('#status').val("@Model.regad.status");
+            $("#title").val("@Model.regad.title");
+
+            document.getElementById("postedFile").onchange = function () {
+                if (this.files[0].size > 8291456) {
+                    document.getElementById("postedFile").value = "";
+                    $("#postedFileCp").html("Deposit Slip Photo");
+                    document.getElementById("imgpp").src = "../images/dot.png"
+                    alert("Image can not exceed 8MB!");
+                    this.value = "";
+                } else {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        document.getElementById("imgpp").src = e.target.result;
+                    };
+                    reader.readAsDataURL(this.files[0]);
+                }
+            };
+
+            //if (@Model.errmsg.Length>0)
+            //{
+            //    ShowError("@Model.errmsg");
+            //}
+            //if (@Model.success.Length>0)
+            //{
+            //   ShowSuccess("@Model.success");
+            //}
+        });
+        function toggleIsize(cntr) {
+            var toggleWidth = $(cntr).width() == 100 ? "90%" : "100px";
+            $(cntr).animate({ width: toggleWidth });
+        }
+        function picktk() {
+            var cat = $('#cat').val();
+            if (cat == 'Cardiologist' || cat == 'Physician' || cat == 'Others') {
+                $('#tk').val('2000');
+            } else if (cat == 'Fellow (Students) Cardiology' || cat == 'Fellow (Students) Cardiac Surgery' || cat == 'Cath Lab Technician' || cat == 'Cath Lab Nurse') {
+                $('#tk').val('1000');
+            } else if (cat == 'Industrial Participants') {
+                $('#tk').val('3000');
+            }
+
+        }
+    </script>
+</div>

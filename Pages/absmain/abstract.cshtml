@@ -1,0 +1,128 @@
+﻿@page
+@model Cardicon.Pages.absmain.abstractModel
+@{
+}
+<div class="container mt-3">
+
+    <div class="row">
+        <div class="col-12">
+            <h2 class="hdvio">Abstract Submit</h2>
+            <div class="p-3" style="font-size:large; text-align:center; color: red; font-weight: bold">
+                Abstract Submission Deadline : 15 May, 2023
+            </div>
+        </div>
+    </div>
+
+    @if (Model.errmsg.Length > 1)
+    {
+        <script type="text/javascript">
+            $(function () {
+                ShowError("@Model.errmsg");
+            });
+        </script>
+    }
+    @if (Model.success.Length > 1)
+    {
+        <script type="text/javascript">
+            $(function () {
+                showFinalMsg("Success", "@Model.success", "Go To List", "/absmain/abslist");
+            });
+        </script>
+    }
+
+    <div class="row mt-3 bg-white">
+        <form method="post" class="pe-lg-5 ps-lg-5 pt-3" enctype="multipart/form-data">
+            <div class="mb-3 row">
+                @*<label for="country" class="col-sm-2">Mobile</label>*@
+                <div class="input-group col-sm-10">
+                    <input type="number" class="form-control" placeholder="Please Enter Mobile Number" id="mobile" name="mobile" value="@Model.abst.mobile">
+                    <button type="button" class="btn btn-primary" onclick="findreg()">FIND</button>
+                </div>
+            </div>
+            @*<div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Mobile Number" aria-label="Mobile Number" aria-describedby="button-addon2">
+                <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="findreg()">FIND</button>
+            </div>*@
+
+            <div class="mb-3 row">
+                <label for="nam" class="col-sm-2 col-form-label">Name</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly style="text-transform: uppercase" class="form-control" id="nam" name="nam" value="@Model.abst.nam">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="email" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                    <input type="email" readonly class="form-control" id="email" name="email" value="@Model.abst.email">
+                </div>
+            </div>
+            <div style="text-align:center; font-weight:bold; font-size:large; margin: 5px 5px">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="abs_cat" id="ABSTRACT" value="ABSTRACT">
+                    <label class="form-check-label" for="ABSTRACT">ABSTRACT</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="abs_cat" id="CD" value="CD">
+                    <label class="form-check-label" for="CD">CD</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="abs_cat" id="POSTER" value="POSTER">
+                    <label class="form-check-label" for="POSTER">POSTER</label>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                
+                <label for="abs_head" class="col-sm-2 col-form-label">Topic</label>
+                <div class="col-sm-10">
+                    <input type="text" style="text-transform: uppercase" class="form-control" id="abs_head" name="abs_head" value="@Model.abst.abs_head">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="abs_desc" class="col-sm-2 col-form-label">Title</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="abs_desc" name="abs_desc" value="@Model.abst.abs_desc">
+                </div>
+            </div>
+            
+            <div class="mb-3">
+                <label for="postedFile" id="postedFileCp" class="form-label">Please upload Abstract (PDF / PowerPoint / Document)</label>
+                <input class="form-control" type="file" id="postedFile" name="postedFile" accept="application/msword, application/vnd.ms-powerpoint,
+ application/pdf">
+
+                
+            </div>
+            <div class="mb-3 row">
+                <div class="offset-sm-3 col-sm-3 d-grid">
+                    <button type="submit" class="btn btn-primary">SUBMIT</button>
+                </div>
+                <div class="col-sm-3 d-grid">
+                    <a class="btn btn-warning" href="/absmain/abslist">Cancel</a>
+                </div>
+
+            </div>
+        </form>
+                
+    </div>
+
+    <script>
+        $(function () {
+            $('#imglogo').attr('src', '../images/brand-logo.jpg');
+            $("input[name=abs_cat][value='@Model.abst.abs_cat']").prop("checked", true);
+
+            document.getElementById("postedFile").onchange = function () {
+                if (this.files[0].size > 16291456) {
+                    document.getElementById("postedFile").value = "";
+                    $("#postedFileCp").html("Please upload Abstract (PDF / PowerPoint / Document)");
+                    alert("Document size can not exceed 16MB!");
+                    this.value = "";
+                } else {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        //document.getElementById("imgpp").src = e.target.result;
+                    };
+                    reader.readAsDataURL(this.files[0]);
+                }
+            };
+        });
+    </script>
+</div>

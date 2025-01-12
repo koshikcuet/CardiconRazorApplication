@@ -1,0 +1,59 @@
+﻿@page
+@model Cardicon.Pages.loginModel
+@{
+}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            @if (Model.errmsg != "")
+            {
+                @if (Model.errmsg == "Logged In")
+                {
+                    <script type="text/javascript">
+                        setLS("Log", "@ViewData["Log"]");
+                        setLS("User", "@ViewData["User"]");
+                        location.href = "/regis/reglist";
+                    </script>
+                                       
+                    //Response.Redirect("/regis/reglist");
+                } else
+                {
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        @Model.errmsg;
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
+            } 
+        </div>
+        <div class="col-12 mt-5 d-flex justify-content-center">
+            <div><h4 class="hdsky" style="width:306px">LOG IN</h4></div>
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+            
+            <div class="ps-5 pe-5 pt-2 pb-2" style="background-color:beige; width:306px">
+                
+                <form method="post">
+                    <div class="mb-3">
+                        <label for="usr" class="form-label">User Name</label>
+                        <input type="text" class="form-control" id="usr" name="usr">
+                    </div>
+                    <div class="mb-3">
+                        <label for="pass" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="pass" name="pass">
+                    </div>
+                    <div class="text-center"><input type="submit" class="btn btn-success" value="Log In"></div>
+                </form>
+            </div>
+                        
+
+        </div>
+    </div>
+    @*@if (Model.hello != "")
+    {
+        <div class="alert alert-danger" role="alert">
+            @HttpContext.Session.GetString("User");
+        </div>
+    }*@
+
+    
+</div>

@@ -1,0 +1,33 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "sweetalert2@11.7.3",
+      "destination": "wwwroot/lib/sweetalert2/",
+      "files": [
+        "sweetalert2.min.js",
+        "sweetalert2.d.ts",
+        "sweetalert2.min.css"
+      ]
+    },
+    {
+      "library": "crypto-js@4.1.1",
+      "destination": "wwwroot/lib/crypto-js/",
+      "files": [
+        "aes.js"
+      ]
+    },
+    {
+      "library": "moment.js@2.29.4",
+      "destination": "wwwroot/lib/moment.js/",
+      "files": [
+        "moment.min.js"
+      ]
+    },
+    {
+      "library": "wow@1.1.2",
+      "destination": "wwwroot/lib/wow/"
+    }
+  ]
+}

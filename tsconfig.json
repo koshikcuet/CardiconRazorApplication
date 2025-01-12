@@ -1,0 +1,22 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "noEmitOnError": false,
+    "target": "ES6",
+    "module": "System",
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": false,
+    "rootDir": "ts",
+    "outDir": "wwwroot/js",
+    "outFile": "wwwroot/js/site.js",
+    "alwaysStrict": false,
+    "strict": false,
+    "noImplicitThis": false
+  },
+  "exclude": [
+    "node_modules",
+    "wwwroot"
+  ]
+}
