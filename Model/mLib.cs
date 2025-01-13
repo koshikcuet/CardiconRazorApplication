@@ -47,7 +47,7 @@ namespace Cardicon.Model
         public string sendSMS(string mob, string msg)
         {
             //8809612442480
-            string ad = "https://api.smsinbd.com/sms-api/sendsms?api_token=D7KfWkGcrQkUxLcWOI8VUot4S3mniXFU2Sls1Abj&senderid=8809612442480&message=" + msg + "&contact_number=" + mob;
+            
             using (WebClient wc = new WebClient())
             {
                 string resp = wc.DownloadString(ad);
